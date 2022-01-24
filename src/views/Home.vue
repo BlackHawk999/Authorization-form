@@ -1,27 +1,54 @@
 <template>
   <div class="home">
-    <Login />
+    <div v-if="user" class="info">
+      <p class="info__item">
+        Name: <span>{{ user.name }}</span>
+      </p>
+      <p class="info__item">
+        Email: <span>{{ user.email }}</span>
+      </p>
+    </div>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-
-import Login from "@/components/Login";
+import { mapState } from "vuex";
 
 export default {
   name: "Home",
-  components: { Login },
+  computed: {
+    ...mapState({
+      user: (state) => state.user,
+    }),
+  },
+  created() {
+    if (!this.user) return this.$router.push("/auth");
+  },
 };
 </script>
 
 <style lang="scss" scoped>
 .home {
-  width: 100%;
-  height: 100%;
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  background-color: #21d4fd;
-  background-image: linear-gradient(19deg, #21d4fd 0%, #b721ff 100%);
+  align-items: center;
+  min-height: 100vh;
+}
+.info {
+  display: flex;
+  flex-direction: column;
+
+  &__item {
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    font-weight: 600;
+
+    span {
+      margin-left: 15px;
+      font-weight: 400;
+    }
+  }
 }
 </style>

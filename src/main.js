@@ -5,6 +5,7 @@ import store from "./store";
 import axios from "axios";
 import VueAxios from "vue-axios";
 
+
 // set base url
 axios.defaults.baseURL = "https://lumus.wistis.ru/api/v1/";
 
